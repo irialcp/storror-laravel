@@ -1,0 +1,198 @@
+.cta-buttons-section {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2.5rem 1rem;
+  
+}
+
+.cta-button {
+    padding: 2vh 3vw;
+    background-color: black;
+    color: #000;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: rgb(234, 251, 83);
+}
+
+.cta-button:hover {
+    background-color: rgba (0, 0, 0, 0.8);
+}
+
+.cta-button:last-child {
+    background-color: rgb(234, 251, 83);
+    color: black;
+}
+
+.carousel-section {
+    padding: 4rem 2rem;
+    color: white;
+    text-align: center;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    gap: 2rem;
+    width: 100%;
+    height: 30vh;
+}
+
+.carousel-container img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-container img:nth-child(7){
+    max-width: 200%;
+}
+
+#info-section {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1vw;
+    color: white;
+    background-color: rgb(30, 30, 30);
+    padding: 20px;
+}
+
+#info-text {
+    box-sizing: border-box;
+    display: flex;
+    padding: 15vh 5vw;
+    flex-direction: column;
+    align-items: start;
+    text-align: start;
+    gap: 3vh;
+    font-size: 20px;
+}
+
+#info-text h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#info-text p {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+#info-image {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+#info-image img {
+    width: 100%;
+    height: 70%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+#text_with_icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1vw;
+    margin-top: 10vh;
+    width: 100vw;
+    height: 30vh;
+}
+
+#information {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+.block_icon {
+    width: 30%;
+    gap: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.block_icon svg{
+    width: 4vw;
+    height: 4vh;
+}
+
+.block_icon h6 {
+    font-size: 18px;
+    width: 100%;
+}
+
+.block_icon p {
+    font-size: 14px;
+    width: 100%;
+}
+
+#image_button {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 2vh;
+    left: 3vw;
+    z-index: 900;
+    width: 12vh;
+    height: 10vh;
+    border-radius: 100%;
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);;
+}
+
+#parkour_images_menu {
+    position: fixed;
+    top: 17vh;
+    right: 50%;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 20px;
+    overflow-y: scroll;
+    display: none;
+    z-index: 1000;
+}
+
+#parkour_images_menu.active {
+    display: block;
+}
+
+#parkour_images img {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}

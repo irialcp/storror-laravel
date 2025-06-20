@@ -1,0 +1,293 @@
+.cart-page-content {
+
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem; 
+    margin-bottom: 5rem; 
+    padding: 3rem; 
+    background-color: #121212; 
+    border-radius: 1rem; 
+    box-shadow: 0 0.8rem 2.5rem rgba(0, 0, 0, 0.4); 
+    color: #e0e0e0; 
+}
+
+.cart-page-content h1 {
+    text-align: center;
+    color: #ebfa52; 
+    margin-bottom: 4rem;
+    font-size: 3em; 
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem; 
+    border-bottom: 0.2rem solid #ebfa52; 
+    padding-bottom: 1.5rem; 
+}
+
+
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.4em;
+    color: #a0a0a0;
+    margin: 5rem 0; 
+    font-weight: 300;
+}
+
+.button-primary,
+.button-secondary {
+    display: inline-block;
+    padding: 1.4rem 3rem;
+    margin: 1rem 1.5rem;
+    border: 0.2rem solid transparent;
+    border-radius: 3rem;
+    font-size: 1.05em;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.button-primary {
+    background-color: #ebfa52;
+    color: #121212;
+}
+
+.button-primary:hover {
+    background-color: #d1e342;
+    box-shadow: 0 0.4rem 1rem rgba(235, 250, 82, 0.4);
+    transform: translateY(-0.2rem);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+.button-secondary:hover {
+    background-color: #333;
+    border-color: #ebfa52;
+    transform: translateY(-0.2rem);
+}
+
+
+.cart-items-container {
+    margin-bottom: 4rem;
+    border-top: 0.1rem dashed #444;
+    padding-top: 3rem;
+}
+
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.4);
+}
+
+.cart-item-image {
+    flex-shrink: 0;
+    width: 12rem;
+    height: 12rem;
+    margin-right: 2.5rem;
+    border-radius: 0.8rem;
+    border: 0.1rem solid #333;
+    overflow: hidden;
+    background-color: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-item-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cart-item-details h2 {
+    font-size: 1.6em;
+    color: #ebfa52;
+    margin-bottom: 0.8rem;
+    font-weight: bold;
+}
+
+.cart-item-details p {
+    font-size: 1.05em;
+    color: #bbb;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.cart-summary {
+    background-color: #1c1c1c;
+    padding: 3rem;
+    border-radius: 0.8rem;
+    text-align: right;
+    box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.3);
+    border-top: 0.2rem solid #333;
+    margin-top: 3rem;
+}
+
+.cart-summary h2 {
+    font-size: 2.2em;
+    color: #ebfa52;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.cart-summary .button-primary,
+.cart-summary .button-secondary {
+    margin-left: 2rem;
+}
+
+
+@media (max-width: 768px) { 
+    .cart-page-content {
+        margin: 3rem auto;
+        padding: 2rem;
+    }
+
+    .cart-page-content h1 {
+        font-size: 2.5em;
+        letter-spacing: 0.2rem;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .cart-item-image {
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .cart-item-details {
+        text-align: center;
+    }
+
+    .cart-item-details h2 {
+        font-size: 1.4em;
+        margin-bottom: 0.8rem;
+    }
+
+    .cart-item-details p {
+        font-size: 0.95em;
+    }
+
+    .cart-summary {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .cart-summary h2 {
+        font-size: 1.8em;
+    }
+
+    .cart-summary .button-primary,
+    .cart-summary .button-secondary {
+        display: block;
+        width: calc(100% - 3rem);
+        margin: 1rem auto;
+    }
+}
+
+@media (max-width: 48rem) { 
+    .cart-page-content {
+        padding: 1.5rem;
+    }
+    .cart-page-content h1 {
+        font-size: 2em;
+        letter-spacing: 0.1rem;
+    }
+    .button-primary,
+    .button-secondary {
+        padding: 1rem 2rem;
+        font-size: 0.95em;
+        margin: 0.8rem auto;
+    }
+    .cart-item-image {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Spazio tra i bottoni e l'input */
+    margin-top: 10px; /* Spazio sopra il controllo quantità */
+    margin-bottom: 10px; /* Spazio sotto il controllo quantità */
+}
+
+.quantity-control button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1em;
+    min-width: 30px; /* Per mantenere la dimensione anche con un solo carattere */
+    text-align: center;
+}
+
+.quantity-control button:hover {
+    background-color: #777;
+}
+
+.quantity-control input[type="number"] {
+    width: 60px; /* Larghezza del campo input */
+    padding: 5px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+/* Nasconde le frecce su Chrome, Safari, Edge */
+.quantity-control input[type="number"]::-webkit-outer-spin-button,
+.quantity-control input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Aggiusta il layout per il bottone di rimozione completa */
+.cart-item-details .remove-item-button {
+    margin-top: 15px; /* Spazio sopra il bottone "Rimuovi Completamente" */
+    width: auto; /* Lascia che il bottone prenda la larghezza del contenuto */
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+/* Media query per mobile, se necessario */
+@media (max-width: 768px) {
+    .quantity-control {
+        justify-content: center; /* Centra i controlli quantità su schermi piccoli */
+    }
+}
