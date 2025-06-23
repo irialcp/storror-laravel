@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registrazione - STORROR</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
-    <script src="{{ asset('js/register.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
+    <script src="{{ asset('js/signin.js') }}" defer></script>
 </head>
 <body class="register-page">
     @include('partials.header')
@@ -15,7 +15,6 @@
     <div class="registration-content-wrapper">
         <form id="register-form">
             <div class="form-group">
-                {{-- CAMBIATO DA 'username' A 'name' --}}
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required class="form-control">
             </div>

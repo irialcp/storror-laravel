@@ -346,6 +346,56 @@
     }
 }
 
+/* Stile per prodotti non in stock */
+.product-card[data-in-stock="false"] {
+    opacity: 0.6;
+    position: relative;
+}
+
+.product-card[data-in-stock="false"] .product-card__image {
+    filter: grayscale(50%);
+}
+
+.product-card[data-in-stock="false"] .product-card__image::after {
+    content: "NON DISPONIBILE";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 8px 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Stile per il pulsante "Add to Cart" disabilitato */
+.product-card .product-card__image .add-to-cart:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.product-card .product-card__image .add-to-cart:disabled:hover {
+    background-color: #ccc;
+    color: #666;
+}
+
+/* Stile per dispositivi mobili - mostra sempre il pulsante disabilitato */
+@media (max-width: 768px) {
+    .product-card[data-in-stock="false"] .add-to-cart:disabled {
+        opacity: 1;
+        position: static;
+        transform: none;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
 #text_with_icon {
     display: flex;
     align-items: center;

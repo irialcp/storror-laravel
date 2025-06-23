@@ -127,3 +127,4 @@ class ShopController extends Controller
         return view('product.show', ['product' => $product]);
     }
 }
+

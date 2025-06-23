@@ -80,18 +80,18 @@ class AuthController extends Controller
         return redirect('home');
     }
 
-    public function showRegistrationForm()
+    public function showSigninForm()
     {
         if (Auth::check()) {
             return redirect()->route('home');
         }
-        return view('auth.register');
+        return view('auth.signin');
     }
 
     /**
      * Elabora la richiesta di registrazione.
      */
-    public function registerProcess(Request $request)
+    public function signinProcess(Request $request)
     {
         try {
             $request->validate([

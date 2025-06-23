@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // CAMBIATO DA 'username' A 'name'
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch('/register', {
+                const response = await fetch('/signin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

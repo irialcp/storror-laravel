@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Storror Clone - Homepage</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
@@ -13,41 +14,44 @@
 
 <body>
     @include('partials.header')
+    <div class="overlay"></div>
     <button id="image_button">Parkour Images</button>
     <div id="parkour_images_menu">
-        <div id="parkour_images"></div>
+        <div id="parkour_images">
+            
+        </div>
         <button id="close_button">Close</button>
     </div>
-    <main>
-        <section class="carousel-section">
-            <div id="dynamic-carousel" class="carousel-container">
-                </div>
-        </section>
-        <section class="cta-buttons-section">
-            <a href="{{ url('shop') }}" class="cta-button">Shop</a>
-            <a href="{{ url('team') }}" class="cta-button">Team</a>
-        </section>
 
-        <section id="info-section">
-            <div id="info-text">
-                <h3>NEW DOCUMENTARY</h3>
-                <h1>WE ARE STORROR</h1>
-                <p>At the peak of a death-defying career, the 7 friends of parkour team Storror embark on what could 
-                    be their final project: a globetrotting quest to conquer 4 extreme environments. Faced with harrowing 
-                    accidents and personal conflicts, the team grapples to maintain the bonds that have united them 
-                    since their beginnings as ragtag street kids. From Michael Bay, this immersive documentary delves 
-                    into these thrilling athletes who command over 10 million YouTube subscribers and nearly 3 billion 
-                    views. Equal parts adrenaline and heart, the film takes you to the edge and asks: What's truly 
-                    worth risking your life for?
-                </p>
-                <spam>More release info coming soon.</spam>
-                <a href="team.php"></a>
-            </div>
-            <div id="info-image">
-                <img src="{{ asset('images/info.png') }}" alt="Informazioni">
-            </div>
-        </section>
-        <section id="text_with_icon">
+    <section class="carousel-section">
+        <div id="dynamic-carousel" class="carousel-container">
+        </div>
+    </section>
+    <section class="cta-buttons-section">
+        <a href="{{ url('shop') }}" class="cta-button">Shop</a>
+        <a href="{{ url('team') }}" class="cta-button">Team</a>
+    </section>
+
+    <section id="info-section">
+        <div id="info-text">
+            <h3>NEW DOCUMENTARY</h3>
+            <h1>WE ARE STORROR</h1>
+            <p>At the peak of a death-defying career, the 7 friends of parkour team Storror embark on what could 
+                be their final project: a globetrotting quest to conquer 4 extreme environments. Faced with harrowing 
+                accidents and personal conflicts, the team grapples to maintain the bonds that have united them 
+                since their beginnings as ragtag street kids. From Michael Bay, this immersive documentary delves 
+                into these thrilling athletes who command over 10 million YouTube subscribers and nearly 3 billion 
+                views. Equal parts adrenaline and heart, the film takes you to the edge and asks: What's truly 
+                worth risking your life for?
+            </p>
+            <spam>More release info coming soon.</spam>
+            <a href="team.php"></a>
+        </div>
+        <div id="info-image">
+            <img src="{{ asset('images/info.png') }}" alt="Informazioni">
+        </div>
+    </section>
+    <section id="text_with_icon">
     <div id="information">
         <div class="block_icon">
             <svg xmlns="http://www.w3.org/2000/svg" role="presentation" fill="none" focusable="false" stroke-width="1" width="24" height="24" class="hidden sm:block icon icon-picto-box" viewBox="0 0 24 24">
@@ -84,8 +88,7 @@
             <h6>30 DAYS RETURNS</h6>
             <P>Return or exchange your order within 30 days.</P>
     </div>
-    </main>
+    </section>
     @include('partials.footer')
 </body>
-
 </html>

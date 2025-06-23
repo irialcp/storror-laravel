@@ -30,6 +30,55 @@
     color: black;
 }
 
+#image_button {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 2vh;
+    left: 3vw;
+    z-index: 900;
+    width: 12vh;
+    height: 10vh;
+    border: none;
+    border-radius: 100%;
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);;
+}
+
+#parkour_images_menu {
+    position: fixed;
+    top: 17vh;
+    right: 50%;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 20px;
+    overflow-y: scroll;
+    display: none;
+    z-index: 1000;
+}
+
+#parkour_images_menu.active {
+    display: block;
+}
+
+#parkour_images img {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .carousel-section {
     padding: 4rem 2rem;
     color: white;
@@ -55,8 +104,32 @@
     border-radius: 10px;
 }
 
-.carousel-container img:nth-child(7){
-    max-width: 200%;
+@media (max-width: 1024px) {
+    .carousel-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 1rem;
+    }
+
+    .carousel-container img {
+        flex: 0 0 auto;
+        max-width: 70%;
+        scroll-snap-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container img {
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container img {
+        max-width: 95%;
+    }
 }
 
 #info-section {
