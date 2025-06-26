@@ -39,6 +39,7 @@
     color: white;
     font-size: 18px;
 }
+
 #footer #wraper #footer_content #link-menu ul {
     list-style: none;
     display: flex;
@@ -85,8 +86,9 @@
 #footer #wraper #footer_content #news input:focus {
     outline-color: white;
 }
+
 #footer #wraper #footer_content #news input:hover {
-   border-color: white;
+    border-color: white;
 }
 
 #footer #wraper #footer_content #block-text {
@@ -97,7 +99,7 @@
 }
 
 #footer #wraper #footer_content #block-text h4 {
-    color:white;
+    color: white;
     font-size: 18px;
 }
 
@@ -150,11 +152,11 @@
 @media (max-width: 1000px) {
 
 
-    #footer{
+    #footer {
         height: 160vh;
     }
 
-    #footer #wraper{
+    #footer #wraper {
         height: 100vh;
     }
 
@@ -194,7 +196,7 @@
     }
 }
 
-#chat_button{
+#chat_button {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -208,6 +210,7 @@
     background-color: #e0e0e0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
 #chat_button:hover {
     cursor: pointer;
 }
@@ -228,8 +231,8 @@
     background: white;
     border: 1px solid #ccc;
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    display: none; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
@@ -238,7 +241,7 @@
 
 }
 
-#chat_container h1{
+#chat_container h1 {
     font-size: 2em;
     color: black;
 }
@@ -258,11 +261,13 @@
     max-width: 80%;
     word-wrap: break-word;
 }
+
 .user-message {
     background-color: #e0e0e0;
     color: black;
     align-self: flex-end;
 }
+
 .bot-message {
     background-color: #333;
     color: white;
@@ -280,7 +285,8 @@
 #chat_container #user_input {
     width: 80%;
     height: 5vh;
-    border: none;;
+    border: none;
+    ;
     border-radius: 20px;
     padding: 0.5em;
     font-size: 1em;
@@ -306,5 +312,5 @@
 }
 
 #chat_container.active {
-    display: flex; 
+    display: flex;
 }

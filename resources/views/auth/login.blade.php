@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <script src="{{ asset('js/main.js') }}" defer></script>
     <script src="{{ asset('js/login.js') }}" defer></script>
 </head>
+
 <body class="login-page">
     @include('partials.header')
 
@@ -25,12 +27,11 @@
             </div>
             <button type="submit">Accedi</button>
         </form>
-        <p id="login-message" style="color: red; margin-top: 10px;"></p>
         <span>Non ha ancora un account? <a href="{{ route('register') }}">Registrati qui!</a></span>
     </div>
-    
+
     @include('partials.footer')
-    
-    <!-- Script corretti - IMPORTANTE: chiudere correttamente i tag -->
+
 </body>
+
 </html>

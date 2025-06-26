@@ -95,6 +95,7 @@ button:hover {
     font-weight: bold;
     transition: color 0.3s ease;
 }
+
 .login-content-wrapper spam a:hover {
     color: #e0e0e0;
     text-decoration: underline;
@@ -130,7 +131,9 @@ button:hover {
         padding: 20px;
         gap: 2.5vh;
     }
-    .form-control, button {
+
+    .form-control,
+    button {
         height: 5vh;
         font-size: 0.95em;
     }

@@ -3,25 +3,25 @@
     max-width: 90rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5rem; 
-    margin-bottom: 5rem; 
-    padding: 3rem; 
-    background-color: #121212; 
-    border-radius: 1rem; 
-    box-shadow: 0 0.8rem 2.5rem rgba(0, 0, 0, 0.4); 
-    color: #e0e0e0; 
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    padding: 3rem;
+    background-color: #121212;
+    border-radius: 1rem;
+    box-shadow: 0 0.8rem 2.5rem rgba(0, 0, 0, 0.4);
+    color: #e0e0e0;
 }
 
 .cart-page-content h1 {
     text-align: center;
-    color: #ebfa52; 
+    color: #ebfa52;
     margin-bottom: 4rem;
-    font-size: 3em; 
+    font-size: 3em;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.3rem; 
-    border-bottom: 0.2rem solid #ebfa52; 
-    padding-bottom: 1.5rem; 
+    letter-spacing: 0.3rem;
+    border-bottom: 0.2rem solid #ebfa52;
+    padding-bottom: 1.5rem;
 }
 
 
@@ -29,7 +29,7 @@
     text-align: center;
     font-size: 1.4em;
     color: #a0a0a0;
-    margin: 5rem 0; 
+    margin: 5rem 0;
     font-weight: 300;
 }
 
@@ -163,7 +163,7 @@
 }
 
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
     .cart-page-content {
         margin: 3rem auto;
         padding: 2rem;
@@ -216,20 +216,23 @@
     }
 }
 
-@media (max-width: 48rem) { 
+@media (max-width: 48rem) {
     .cart-page-content {
         padding: 1.5rem;
     }
+
     .cart-page-content h1 {
         font-size: 2em;
         letter-spacing: 0.1rem;
     }
+
     .button-primary,
     .button-secondary {
         padding: 1rem 2rem;
         font-size: 0.95em;
         margin: 0.8rem auto;
     }
+
     .cart-item-image {
         width: 7rem;
         height: 7rem;
@@ -239,9 +242,9 @@
 .quantity-control {
     display: flex;
     align-items: center;
-    gap: 5px; /* Spazio tra i bottoni e l'input */
-    margin-top: 10px; /* Spazio sopra il controllo quantità */
-    margin-bottom: 10px; /* Spazio sotto il controllo quantità */
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .quantity-control button {
@@ -252,7 +255,7 @@
     cursor: pointer;
     border-radius: 4px;
     font-size: 1em;
-    min-width: 30px; /* Per mantenere la dimensione anche con un solo carattere */
+    min-width: 30px;
     text-align: center;
 }
 
@@ -261,7 +264,7 @@
 }
 
 .quantity-control input[type="number"] {
-    width: 60px; /* Larghezza del campo input */
+    width: 60px;
     padding: 5px;
     border: 1px solid #444;
     border-radius: 4px;
@@ -277,17 +280,15 @@
     margin: 0;
 }
 
-/* Aggiusta il layout per il bottone di rimozione completa */
 .cart-item-details .remove-item-button {
-    margin-top: 15px; /* Spazio sopra il bottone "Rimuovi Completamente" */
-    width: auto; /* Lascia che il bottone prenda la larghezza del contenuto */
+    margin-top: 15px;
+    width: auto;
     padding: 8px 15px;
     font-size: 0.9em;
 }
 
-/* Media query per mobile, se necessario */
 @media (max-width: 768px) {
     .quantity-control {
-        justify-content: center; /* Centra i controlli quantità su schermi piccoli */
+        justify-content: center;
     }
 }
