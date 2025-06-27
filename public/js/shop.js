@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 let allProducts = [];
 
-// Modifica la funzione loadProducts esistente per salvare i prodotti
 async function loadProducts() {
     const productContainer = document.getElementById("product-list");
     if (!productContainer) {
@@ -33,7 +32,6 @@ async function loadProducts() {
         const products = await response.json();
         console.log("Prodotti ricevuti:", products);
 
-        // Salva tutti i prodotti nella variabile globale
         allProducts = products;
 
         if (!products || !Array.isArray(products) || products.length === 0) {
@@ -43,10 +41,8 @@ async function loadProducts() {
             return;
         }
 
-        // Renderizza tutti i prodotti inizialmente
         renderProducts(products);
 
-        // Aggiungi l'event listener per il filtro "In Stock Only"
         setupStockFilter();
     } catch (error) {
         console.error("Errore nel caricamento dei prodotti:", error);
@@ -55,7 +51,6 @@ async function loadProducts() {
     }
 }
 
-// Funzione per renderizzare i prodotti
 function renderProducts(products) {
     const productContainer = document.getElementById("product-list");
 
@@ -70,7 +65,7 @@ function renderProducts(products) {
         console.log("Processing product:", product);
 
         if (product && product.name && product.price && product.image) {
-            // Controlla se il prodotto è in stock per mostrare un indicatore
+
             const stockStatus = product.in_stock
                 ? ""
                 : '<span style="color: red; font-size: 0.8em;">(Esaurito)</span>';
@@ -111,11 +106,9 @@ function renderProducts(products) {
     productContainer.innerHTML = htmlContent;
     console.log("Contenuto inserito in product-list.");
 
-    // Riattiva gli event listeners per i pulsanti "Add to Cart"
     attachAddToCartListeners();
 }
 
-// Funzione per configurare il filtro stock
 function setupStockFilter() {
     const stockToggle = document.getElementById("inStockToggle");
 
@@ -128,7 +121,6 @@ function setupStockFilter() {
     }
 }
 
-// Funzione per filtrare i prodotti in base allo stock
 function filterByStock(inStockOnly) {
     console.log(
         "Filtraggio per stock:",
@@ -138,15 +130,13 @@ function filterByStock(inStockOnly) {
     let filteredProducts = allProducts;
 
     if (inStockOnly) {
-        // Filtra solo i prodotti in stock
         filteredProducts = allProducts.filter((product) => {
-            // Controlla se in_stock è true, 1, o "1" (per gestire diversi tipi di dato)
             return (
                 product.in_stock === true ||
                 product.in_stock === 1 ||
                 product.in_stock === "1" ||
                 (product.stock && product.stock > 0)
-            ); // Fallback se usi un campo "stock" numerico
+            );
         });
 
         console.log(
@@ -154,17 +144,14 @@ function filterByStock(inStockOnly) {
         );
     }
 
-    // Renderizza i prodotti filtrati
     renderProducts(filteredProducts);
 }
 
-// Funzione separata per gestire gli event listeners dei pulsanti "Add to Cart"
 function attachAddToCartListeners() {
     document.querySelectorAll(".add-to-cart").forEach((button) => {
         button.addEventListener("click", function (event) {
             event.preventDefault();
 
-            // Non aggiungere al carrello se il prodotto non è in stock
             if (this.disabled) {
                 alert("Questo prodotto non è disponibile al momento.");
                 return;
@@ -176,20 +163,6 @@ function attachAddToCartListeners() {
     });
 }
 
-// Funzione opzionale per resettare tutti i filtri
-function resetFilters() {
-    const stockToggle = document.getElementById("inStockToggle");
-    if (stockToggle) {
-        stockToggle.checked = false;
-    }
-
-    // Mostra tutti i prodotti
-    renderProducts(allProducts);
-}
-
-/**
- * @param {string} productId - L'ID del prodotto da aggiungere.
- */
 async function addToCart(productId) {
     try {
         const response = await fetch("/api/cart/add", {

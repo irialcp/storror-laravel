@@ -28,7 +28,7 @@
             <button type="submit">Accedi</button>
         </form>
         <p id="login-message" style="margin: 10px 0;"></p>
-        <span>Non ha ancora un account? <a href="{{ route('register') }}">Registrati qui!</a></span>
+        <span>Non ha ancora un account? <a href="{{ route('signin') }}">Registrati qui!</a></span>
     </div>
 
     @include('partials.footer')

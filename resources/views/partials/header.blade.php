@@ -60,7 +60,7 @@
                             fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                @auth {{-- Mostra questo blocco solo se l'utente è autenticato --}}
+                @auth
                     <button id="logout_button_desktop" title="Logout">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -77,7 +77,7 @@
                         </a>
                     </button>
                 @endauth
-                @guest {{-- Mostra questo blocco solo se l'utente NON è autenticato --}}
+                @guest
                     <a href="{{ url('login') }}" title="Login">
                         <svg xmlns="http://www.w3.org/2000/svg" role="presentation" stroke-width="1" focusable="false"
                             width="22" height="22" class="icon icon-account" viewBox="0 0 22 22">
@@ -119,7 +119,7 @@
                                 stroke-linejoin="round" />
                         </svg>
                     </a>
-                    @auth {{-- Mostra questo blocco solo se l'utente è autenticato --}}
+                    @auth
                         <button id="logout_button_desktop" title="Logout">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 style="display: none;">
@@ -138,7 +138,7 @@
                             </a>
                         </button>
                     @endauth
-                    @guest {{-- Mostra questo blocco solo se l'utente NON è autenticato --}}
+                    @guest
                         <a href="{{ url('login') }}" title="Login">
                             <svg xmlns="http://www.w3.org/2000/svg" role="presentation" stroke-width="1"
                                 focusable="false" width="22" height="22" class="icon icon-account"

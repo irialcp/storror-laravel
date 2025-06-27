@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
-    /**
-     * Aggiunge un prodotto al carrello.
-     */
     public function addToCart(Request $request)
     {
         if (!Auth::check()) {
@@ -29,18 +26,18 @@ class CartController extends Controller
         $productId = $request->input('product_id');
 
         try {
-            $existingCartItem = DB::table('cart_items') // Corretto: cart -> cart_items
+            $existingCartItem = DB::table('cart_items')
                 ->where('user_id', $userId)
                 ->where('product_id', $productId)
                 ->first();
 
             if ($existingCartItem) {
-                DB::table('cart_items') // Corretto: cart -> cart_items
+                DB::table('cart_items')
                     ->where('user_id', $userId)
                     ->where('product_id', $productId)
                     ->increment('quantity');
             } else {
-                DB::table('cart_items')->insert([ // Corretto: cart -> cart_items
+                DB::table('cart_items')->insert([
                     'user_id' => $userId,
                     'product_id' => $productId,
                     'quantity' => 1,
@@ -63,10 +60,6 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * Rimuove completamente un articolo dal carrello usando il cart_id.
-     * Questo metodo corrisponde alla funzione `removeFromCart` nel JS.
-     */
     public function removeCartItem(Request $request)
     {
         if (!Auth::check()) {
@@ -77,16 +70,16 @@ class CartController extends Controller
         }
 
         $request->validate([
-            'cart_id' => 'required|integer' // L'ID della riga nella tabella 'cart_items'
+            'cart_id' => 'required|integer'
         ]);
 
         $userId = Auth::id();
         $cartId = $request->input('cart_id');
 
         try {
-            $deleted = DB::table('cart_items') // Corretto: cart -> cart_items
+            $deleted = DB::table('cart_items')
                 ->where('id', $cartId)
-                ->where('user_id', $userId) // Assicura che l'utente stia rimuovendo solo i propri articoli
+                ->where('user_id', $userId)
                 ->delete();
 
             if ($deleted) {
@@ -110,26 +103,19 @@ class CartController extends Controller
         }
     }
 
-
-    /**
-     * Ottiene gli articoli del carrello per l'utente autenticato.
-     */
     public function getCartItems()
     {
         if (!Auth::check()) {
-            // Se l'utente non è autenticato, restituisci un carrello vuoto o un messaggio
-            // Questo è stato gestito nel JS per mostrare un messaggio specifico.
             return response()->json([]);
         }
 
         $userId = Auth::id();
 
         try {
-            // Questo era già corretto
             $cartItems = DB::table('cart_items as ci')
                 ->join('products as p', 'ci.product_id', '=', 'p.id')
                 ->select(
-                    'ci.id AS cart_id', // Essenziale per il JS
+                    'ci.id AS cart_id',
                     'p.id AS product_id',
                     'p.name AS NAME',
                     'p.price',
@@ -140,7 +126,6 @@ class CartController extends Controller
                 ->orderBy('p.name')
                 ->get();
 
-            // Adatta i percorsi delle immagini se necessario (come nel tuo codice originale)
             $modifiedCartItems = $cartItems->map(function ($item) {
                 if (isset($item->image)) {
                     $originalImagePath = $item->image;
@@ -161,10 +146,6 @@ class CartController extends Controller
         }
     }
 
-    /**
-     * Aggiorna la quantità di un articolo nel carrello.
-     * Questo metodo gestisce anche la rimozione se la quantità è <= 0.
-     */
     public function updateCartItemQuantity(Request $request)
     {
         if (!Auth::check()) {
@@ -176,7 +157,7 @@ class CartController extends Controller
 
         $request->validate([
             'cart_id' => 'required|integer',
-            'quantity' => 'required|integer|min:0' // Minimo 0, perché 0 significa eliminare
+            'quantity' => 'required|integer|min:0'
         ]);
 
         $userId = Auth::id();
@@ -185,10 +166,9 @@ class CartController extends Controller
 
         try {
             if ($quantity <= 0) {
-                // Se la quantità è 0 o meno, rimuovi l'articolo completamente
-                $deleted = DB::table('cart_items') // Corretto: cart -> cart_items
+                $deleted = DB::table('cart_items')
                     ->where('id', $cartId)
-                    ->where('user_id', $userId) // Assicura che l'utente stia rimuovendo solo i propri articoli
+                    ->where('user_id', $userId)
                     ->delete();
 
                 if ($deleted) {
@@ -204,10 +184,9 @@ class CartController extends Controller
                 }
 
             } else {
-                // Altrimenti, aggiorna la quantità
-                $updated = DB::table('cart_items') // Corretto: cart -> cart_items
+                $updated = DB::table('cart_items')
                     ->where('id', $cartId)
-                    ->where('user_id', $userId) // Assicura che l'utente stia aggiornando solo i propri articoli
+                    ->where('user_id', $userId)
                     ->update([
                         'quantity' => $quantity,
                         'updated_at' => now()

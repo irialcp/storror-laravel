@@ -1,5 +1,4 @@
 // public/js/cart.js
-
 document.addEventListener("DOMContentLoaded", function () {
     loadCart();
 });
@@ -48,8 +47,6 @@ async function loadCart() {
         cartItems.forEach((item) => {
             const itemPrice = parseFloat(item.price) || 0;
             const itemQuantity = parseInt(item.quantity) || 0;
-            // Assicurati che 'cart_id' sia disponibile, se la query di get_cart.php non lo ritorna, dovrai modificarla.
-            // Ho aggiunto 'ci.id AS cart_id' alla query di get_cart.php nell'esempio sotto.
             const cartId = item.cart_id;
 
             const subtotal = itemQuantity * itemPrice;
@@ -93,7 +90,6 @@ async function loadCart() {
 
         cartContainer.innerHTML = fullCartHtml;
 
-        // Aggiungi event listener per i bottoni di rimozione completa
         document.querySelectorAll(".remove-item-button").forEach((button) => {
             button.addEventListener("click", function () {
                 const cartId = this.dataset.cartId;
@@ -102,21 +98,18 @@ async function loadCart() {
                         "Sei sicuro di voler rimuovere completamente questo prodotto dal carrello?"
                     )
                 ) {
-                    removeFromCart(cartId); // Questa funzione rimuove completamente
+                    removeFromCart(cartId);
                 }
             });
         });
 
-        // Event listeners per il controllo quantità (input e bottoni +/-)
         document.querySelectorAll(".quantity-input").forEach((input) => {
             input.addEventListener("change", function () {
                 const cartId = this.dataset.cartId;
                 const newQuantity = parseInt(this.value);
                 if (!isNaN(newQuantity) && newQuantity >= 1) {
-                    // La quantità minima è 1
                     updateCartItemQuantity(cartId, newQuantity);
                 } else if (newQuantity === 0) {
-                    // Se l'utente digita 0, chiedi di rimuovere completamente
                     if (
                         confirm(
                             "Impostando la quantità a 0, il prodotto verrà rimosso completamente. Vuoi procedere?"
@@ -126,14 +119,13 @@ async function loadCart() {
                     } else {
                         this.value = parseInt(
                             this.dataset.previousQuantity || 1
-                        ); // Ripristina la quantità precedente o a 1
+                        );
                     }
                 } else {
-                    // Valore non valido
-                    this.value = parseInt(this.dataset.previousQuantity || 1); // Ripristina la quantità precedente o a 1
+
+                    this.value = parseInt(this.dataset.previousQuantity || 1);
                 }
             });
-            // Memorizza la quantità iniziale per ripristino in caso di input non valido
             input.dataset.previousQuantity = input.value;
         });
 
@@ -145,10 +137,8 @@ async function loadCart() {
                 );
                 let currentQuantity = parseInt(inputElement.value);
                 if (currentQuantity > 1) {
-                    // La quantità minima è 1
                     updateCartItemQuantity(cartId, currentQuantity - 1);
                 } else if (currentQuantity === 1) {
-                    // Se è 1 e si clicca '-', chiedi di rimuovere
                     if (
                         confirm(
                             "Vuoi rimuovere completamente questo prodotto dal carrello?"
@@ -177,10 +167,6 @@ async function loadCart() {
     }
 }
 
-/**
- * Funzione per rimuovere completamente un articolo dal carrello.
- * @param {string} cartId - L'ID dell'elemento del carrello da rimuovere (non l'ID del prodotto).
- */
 async function removeFromCart(cartId) {
     try {
         const csrfToken = document
@@ -217,18 +203,12 @@ async function removeFromCart(cartId) {
     }
 }
 
-/**
- * Funzione per aggiornare la quantità di un articolo nel carrello.
- * @param {string} cartId - L'ID dell'elemento del carrello da aggiornare.
- * @param {number} newQuantity - La nuova quantità per l'articolo.
- */
 async function updateCartItemQuantity(cartId, newQuantity) {
     try {
         const csrfToken = document
             .querySelector('meta[name="csrf-token"]')
             .getAttribute("content");
         const response = await fetch("/api/cart/update-quantity", {
-            // Nuova route per aggiornare la quantità
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -240,14 +220,12 @@ async function updateCartItemQuantity(cartId, newQuantity) {
         const result = await response.json();
 
         if (response.ok && result.success) {
-            // alert('Quantità aggiornata!'); // Potresti voler mostrare un feedback meno invasivo
-            loadCart(); // Ricarica il carrello per aggiornare la visualizzazione e il totale
+            loadCart();
         } else {
             const message =
                 result.message ||
                 "Errore sconosciuto durante l'aggiornamento della quantità.";
             alert("Errore: " + message);
-            // Ripristina la quantità visualizzata se l'aggiornamento fallisce
             const inputElement = document.querySelector(
                 `.quantity-input[data-cart-id="${cartId}"]`
             );

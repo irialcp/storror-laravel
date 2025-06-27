@@ -7,8 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         loginForm.addEventListener("submit", async function (event) {
             event.preventDefault();
 
-            // Rimuovi la lettura del campo username
-            // const username = loginForm.elements.username.value;
             const email = loginForm.elements.email.value;
             const password = loginForm.elements.password.value;
 
@@ -17,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             try {
                 const response = await fetch("/login", {
-                    // Assicurati che l'URL sia /login per la route Laravel
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -26,8 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             .getAttribute("content"),
                     },
                     body: JSON.stringify({
-                        // Rimuovi l'invio del campo username
-                        // username: username,
                         email: email,
                         password: password,
                     }),

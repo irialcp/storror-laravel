@@ -20,20 +20,16 @@ class GetCarouselController extends Controller
             $modifiedCarouselItems = $carouselItems->map(function ($item) {
                 $originalPath = $item->image;
 
-                // Controlla se il percorso necessita della trasformazione 'public/' -> 'images/'
                 if (str_starts_with($originalPath, 'public/')) {
-                    // Vecchio formato: 'public/nome_immagine.png'
                     $newPath = str_replace('public/', 'images/', $originalPath);
                 } elseif (str_starts_with($originalPath, 'images/')) {
-                    // Nuovo formato: 'images/nome_immagine.png' (già corretto)
                     $newPath = $originalPath;
                 } else {
-                    // Gestisci altri casi o logga un avviso se ci sono path inaspettati
                     Log::warning("Percorso immagine inaspettato nel database: " . $originalPath);
-                    $newPath = 'images/default.png'; // Fallback o gestisci l'errore
+                    $newPath = 'images/default.png';
                 }
 
-                $item->image = asset($newPath); // Genera l'URL completo
+                $item->image = asset($newPath);
                 return $item;
             });
 

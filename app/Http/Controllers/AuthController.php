@@ -11,9 +11,6 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Mostra il form di login.
-     */
     public function showLoginForm()
     {
         if (Auth::check()) {
@@ -22,15 +19,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Elabora la richiesta di login, usando email e password per l'autenticazione.
-     */
     public function loginProcess(Request $request)
     {
-        // 1. Validazione dell'input
         try {
-            // Per il login standard di Laravel, ci concentriamo su email e password.
-            // Il campo username verrà ricevuto, ma non usato direttamente in Auth::attempt.
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required|string',
@@ -48,28 +39,16 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
 
-        // 2. Tentativo di autenticazione con Auth::attempt()
         if (Auth::attempt($credentials)) {
-            // Autenticazione riuscita
-            $request->session()->regenerate(); // Previene session fixation
 
-            // Opzionale: puoi aggiornare il campo 'username' dell'utente se è diverso da quello inserito nel form
-            // $user = Auth::user();
-            // if ($user->username !== $request->input('username')) {
-            //     $user->username = $request->input('username');
-            //     $user->save();
-            // }
+            $request->session()->regenerate();
 
             return response()->json(['success' => true, 'message' => 'Login effettuato con successo.', 'loggedIn' => true]);
         } else {
-            // Autenticazione fallita
             return response()->json(['success' => false, 'message' => 'Email o password errati.', 'loggedIn' => false], 401);
         }
     }
 
-    /**
-     * Esegue il logout dell'utente.
-     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -88,9 +67,6 @@ class AuthController extends Controller
         return view('auth.signin');
     }
 
-    /**
-     * Elabora la richiesta di registrazione.
-     */
     public function signinProcess(Request $request)
     {
         try {
@@ -123,7 +99,6 @@ class AuthController extends Controller
                 ], 422);
             }
 
-            // Creazione del nuovo utente - CAMBIATO DA 'username' A 'name'
             $user = User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -138,7 +113,7 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
             Log::error('Errore durante la registrazione: ' . $e->getMessage(), [
-                'name' => $request->input('name'), // Logga il nome invece dello username
+                'name' => $request->input('name'),
                 'email' => $request->input('email'),
             ]);
             return response()->json(['success' => false, 'message' => 'Errore del server durante la registrazione. Riprova più tardi.'], 500);

@@ -1,21 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadCarouselContent();
-    loadUnsplashImages(); // Chiamiamo questa funzione all'avvio
+    loadUnsplashImages();
     const overlay = document.querySelector(".overlay");
     const bottone = document.getElementById("image_button");
     const imageMenuWrap = document.querySelector("#parkour_images_menu");
 
     if (bottone && imageMenuWrap && overlay) {
-        // Aggiunto controllo per assicurare che gli elementi esistano
         bottone.addEventListener("click", () => {
             imageMenuWrap.classList.toggle("active");
             overlay.classList.toggle("active");
-            // Non chiamare loadUnsplashImages qui, lo facciamo una volta all'avvio
-            // o potresti chiamarlo qui se vuoi ricaricare le immagini ogni volta che apri
-            // In questo caso, lo manteniamo all'avavvio per evitare chiamate ripetute se non necessario.
         });
 
-        // Aggiungi un listener per il bottone di chiusura
         const closeButton = document.getElementById("close_button");
         if (closeButton) {
             closeButton.addEventListener("click", () => {
@@ -44,7 +39,6 @@ async function loadCarouselContent() {
         return;
     }
 
-    // URL corretto per l'API Laravel del carosello
     const apiUrl = "/api/carousel-items";
 
     try {
@@ -63,7 +57,6 @@ async function loadCarouselContent() {
             return;
         }
 
-        // Crea un singolo container con tutte le immagini
         let imagesContent = "";
         carouselItems.forEach((item) => {
             if (item.image) {
@@ -81,15 +74,13 @@ async function loadCarouselContent() {
             }
         });
 
-        // Crea il container principale con tutte le immagini
         const htmlContent = `<div class="carousel-container">${imagesContent}</div>`;
 
         carouselContainer.innerHTML = htmlContent;
         carouselContainer.style.display = "none";
-        carouselContainer.offsetHeight; // trigger reflow
+        carouselContainer.offsetHeight;
         carouselContainer.style.display = "block";
 
-        // Aggiungi la classe responsive al container del carousel
         const container = document.querySelector(".carousel-container");
         if (container) {
             container.classList.add("responsive-carousel");
@@ -105,7 +96,6 @@ async function loadCarouselContent() {
     }
 }
 
-// Funzione per gestire il comportamento responsive quando necessario
 function handleResponsiveCarousel() {
     const container = document.querySelector(
         ".carousel-container.responsive-carousel"
@@ -113,7 +103,6 @@ function handleResponsiveCarousel() {
 
     if (!container) return;
 
-    // Rimuovi eventuali stili inline che potrebbero interferire
     if (window.innerWidth <= 1024) {
         container.removeAttribute("style");
 
@@ -129,7 +118,6 @@ function handleResponsiveCarousel() {
     }
 }
 
-// Funzione debounce per ottimizzare le performance durante il resize
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -142,19 +130,16 @@ function debounce(func, wait) {
     };
 }
 
-// Gestisce il resize della finestra
 window.addEventListener("resize", debounce(handleResponsiveCarousel, 250));
 
-// Carica il carousel al caricamento della pagina
 document.addEventListener("DOMContentLoaded", function () {
     loadCarouselContent();
 });
 
-// Esporta le funzioni per uso manuale se necessario
 window.handleResponsiveCarousel = handleResponsiveCarousel;
 window.loadCarouselContent = loadCarouselContent;
 
-// *** NUOVA/MODIFICATA FUNZIONE per caricare le immagini Unsplash dal backend Laravel ***
+
 async function loadUnsplashImages() {
     const container = document.getElementById("parkour_images");
     if (!container) {
@@ -164,15 +149,12 @@ async function loadUnsplashImages() {
         return;
     }
 
-    // URL per l'API Laravel che farà la chiamata a Unsplash
-    // Puoi passare 'query' e 'per_page' se vuoi che Laravel li usi
-    const apiUrl = "/api/unsplash-images?query=parkour&per_page=7"; // Ho mantenuto 7 come nel tuo errore originale
+    const apiUrl = "/api/unsplash-images?query=parkour&per_page=7";
 
     try {
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
-            // Se la risposta non è OK, prova a leggere il testo per debug
             const errorText = await response.text();
             throw new Error(
                 `HTTP error! status: ${response.status}. Dettagli: ${errorText}`
@@ -181,7 +163,6 @@ async function loadUnsplashImages() {
 
         const data = await response.json();
 
-        // Controlla se la risposta del tuo backend è come te l'aspetti (dovrebbe essere la stessa di Unsplash)
         if (!data || !Array.isArray(data.results)) {
             console.warn(
                 "Struttura dati inattesa dalla tua API Laravel (Unsplash):",
@@ -192,7 +173,7 @@ async function loadUnsplashImages() {
             return;
         }
 
-        container.innerHTML = ""; // Pulisce il contenitore
+        container.innerHTML = "";
 
         data.results.forEach((foto) => {
             const img = document.createElement("img");
@@ -210,7 +191,6 @@ async function loadUnsplashImages() {
     }
 }
 
-// Assicurati che closeOnClickOutside sia definita o importata
 function closeOnClickOutside(triggerElements, menuElement, overlayElement) {
     document.addEventListener("click", (event) => {
         const isClickInsideMenu =

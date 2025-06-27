@@ -54,22 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (overlay) overlay.classList.remove("active");
     }
 
-    if (menuButton) {
-        menuButton.addEventListener("click", openMenu);
-    }
-
-    if (menuClose) {
-        menuClose.addEventListener("click", closeMenu);
-    }
-
-    if (overlay) {
-        overlay.addEventListener("click", closeMenu);
-    }
+    if (menuButton) menuButton.addEventListener("click", openMenu);
+    if (menuClose) menuClose.addEventListener("click", closeMenu);
+    if (overlay) overlay.addEventListener("click", closeMenu);
 
     const logoutButton = document.getElementById("logout_button");
-    const logoutButtonDesktop = document.getElementById(
-        "logout_button_desktop"
-    );
+    const logoutButtonDesktop = document.getElementById("logout_button_desktop");
 
     [logoutButton, logoutButtonDesktop].forEach((button) => {
         if (button) {
@@ -95,35 +85,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (result.success) {
                             window.location.href = "/";
                         } else {
-                            console.error(
-                                "Errore durante il logout:",
-                                result.message || "Errore sconosciuto."
-                            );
-                            alert(
-                                "Si è verificato un errore durante il logout: " +
-                                    (result.message || "Errore sconosciuto.")
-                            );
+                            console.error("Errore logout:", result.message);
+                            alert("Errore durante il logout: " + (result.message || "Errore sconosciuto."));
                         }
                     } else {
                         const errorText = await response.text();
-                        console.error(
-                            "Errore HTTP durante il logout:",
-                            response.status,
-                            errorText
-                        );
-                        alert(
-                            "Si è verificato un errore durante il logout: " +
-                                errorText
-                        );
+                        alert("Errore durante il logout: " + errorText);
                     }
                 } catch (error) {
-                    console.error(
-                        "Errore di rete o di elaborazione durante il logout:",
-                        error
-                    );
-                    alert(
-                        "Si è verificato un errore di rete o di elaborazione. Riprova più tardi."
-                    );
+                    console.error("Errore di rete logout:", error);
+                    alert("Errore di rete. Riprova più tardi.");
                 }
             });
         }
@@ -134,45 +105,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const chatMessages = document.getElementById("chat_messages");
     const chatInput = document.getElementById("user_input");
 
-    // Apertura e chiusura chat
-    if (chatButton && chatContainer) {
-        chatButton.addEventListener("click", () => {
-            chatContainer.style.display = "flex";
-        });
-    }
-
-    // Invio con "Enter"
-    if (chatInput) {
-        chatInput.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                sendMessage();
-            }
-        });
-    }
-
-    // Debug se elementi mancanti
     if (!chatButton || !chatContainer || !chatInput || !chatMessages) {
         console.warn("⚠️ Elementi della chat mancanti. Chat disabilitata.");
-    }
-    if (!chatContainer || !chatButton) return;
-
-    const isClickInsideChat = chatContainer.contains(event.target);
-    const isClickOnButton = chatButton.contains(event.target);
-
-    if (
-        chatContainer.style.display === "flex" &&
-        !isClickInsideChat &&
-        !isClickOnButton
-    ) {
-        chatContainer.style.display = "none";
+        return;
     }
 
-    // Rendi la funzione globale perché usi `onclick="sendMessage()"` nell'HTML
-    async function sendMessage() {
-        const chatInput = document.getElementById("user_input");
-        const chatMessages = document.getElementById("chat_messages");
+    chatButton.addEventListener("click", () => {
+        chatContainer.style.display = "flex";
+    });
+
+    chatInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        const isClickInsideChat = chatContainer.contains(event.target);
+        const isClickOnButton = chatButton.contains(event.target);
+
+        if (
+            chatContainer.style.display === "flex" &&
+            !isClickInsideChat &&
+            !isClickOnButton
+        ) {
+            chatContainer.style.display = "none";
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && chatContainer.style.display === "flex") {
+            chatContainer.style.display = "none";
+        }
+    });
+
+    window.sendMessage = async function () {
         const message = chatInput.value.trim();
-
         if (!message) return;
 
         appendMessage("user", message);
@@ -193,11 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(
-                    `Errore ${response.status}: ${
-                        errorData.error || response.statusText
-                    }`
-                );
+                throw new Error(`Errore ${response.status}: ${errorData.error || response.statusText}`);
             }
 
             const data = await response.json();
@@ -207,14 +171,11 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Errore nella comunicazione:", error);
             appendMessage("bot", `Errore: ${error.message}`);
         }
-    }
+    };
 
     function appendMessage(sender, message) {
-        const chatMessages = document.getElementById("chat_messages");
         const messageElement = document.createElement("div");
-        messageElement.classList.add(
-            sender === "user" ? "user-message" : "bot-message"
-        );
+        messageElement.classList.add(sender === "user" ? "user-message" : "bot-message");
         messageElement.textContent = message;
         chatMessages.appendChild(messageElement);
         chatMessages.scrollTop = chatMessages.scrollHeight;
